@@ -1,7 +1,7 @@
 import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r125/build/three.module.js";
 
 export default class {
-	_FOV = 75; // Field of View in degrees
+	_FOV = 40; // Field of View in degrees
 	_CLIPPING_PLANE_NEAR = 0.01;
 	_CLIPPING_PLANE_FAR = 1000;
 
@@ -30,6 +30,7 @@ export default class {
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(...this._cameraConfigObject());
 
+		this._repositionAndPointCamera();
 		this._setRenderSizeAndCameraAspectRatio();
 		this._addResizeEventListener();
 	}
@@ -58,5 +59,11 @@ export default class {
 		window.addEventListener("resize", () =>
 			this._setRenderSizeAndCameraAspectRatio()
 		);
+	}
+
+	_repositionAndPointCamera() {
+		this.camera.position.set(0, 50, 0);
+		this.camera.up.set(0, 0, 1);
+		this.camera.lookAt(0, 0, 0);
 	}
 }
